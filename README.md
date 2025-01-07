@@ -1,9 +1,15 @@
 # PNG to OBJ Script
 
 <p style="text-align: justify;">
-  <strong>-</strong>
+  <strong>Input PNG</strong>
   <br/><br/>
-  <img src=""/>
+  <img src="https://github.com/user-attachments/assets/95b306a2-70f1-4b07-a64e-2e3aff7fd5ed"/>
+</p>
+
+<p style="text-align: justify;">
+  <strong>Output OBJ</strong>
+  <br/><br/>
+  <img src="https://github.com/user-attachments/assets/8c65d2f0-8680-42e8-a9e1-5db6f524911b"/>
 </p>
 
 <p style="text-align: justify;">
