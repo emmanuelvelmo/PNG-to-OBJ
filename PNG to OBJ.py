@@ -205,15 +205,16 @@ for archivo in os.listdir():
             # Posición del punto medio de la línea en el arreglo
             pm_val = (vertices_iterador - 1) // 2
 
-            # Longuitud en píxeles del cuadrado de margen de tolerancia
-            long_cuad_tolerancia = vertices_iterador - 2
+            # Longuitud en píxeles del cuadrado de margen de intolerancia
+            long_cuad_intolerancia = vertices_iterador - 2
 
-            # Número de píxeles de margen de tolerancia
-            tolerancia_x = (long_cuad_tolerancia - 1) / 2
-            tolerancia_y = (long_cuad_tolerancia - 1) / 2
-
-            def funcion_estimar_eliminar(objeto_iter, ind_cor):
-                global iter_linea, pm_val, tolerancia_x, tolerancia_y
+            # Número de píxeles de margen de intolerancia
+            intolerancia_x = (long_cuad_intolerancia - 1) / 2
+            intolerancia_y = (long_cuad_intolerancia - 1) / 2
+            
+            # Función para estimar y eliminar vértices
+            def funcion_estimar_eliminar(objeto_iter, ind_cor, intolerancia_x, intolerancia_y):
+                global iter_linea, pm_val
                 
                 # Calcular coordenada estimada
                 coordenada_estimada = (
@@ -222,8 +223,8 @@ for archivo in os.listdir():
                 )
                 
                 # Eliminar la coordenada si está dentro del margen de error (punto medio)
-                if (abs(coordenada_estimada[0] - iter_linea[1][0]) <= tolerancia_x or
-                    abs(coordenada_estimada[1] - iter_linea[1][1]) <= tolerancia_y):
+                if (abs(coordenada_estimada[0] - iter_linea[1][0]) <= intolerancia_x or
+                    abs(coordenada_estimada[1] - iter_linea[1][1]) <= intolerancia_y):
                     # Eliminar el vértice
                     objeto_iter.pop(iter + pm_val - ind_cor)
                     
@@ -246,8 +247,8 @@ for archivo in os.listdir():
                         iter_linea[1] = objeto_iter[iter + pm_val - ind_cor]
                         iter_linea[2] = objeto_iter[iter + (vertices_iterador - 1) - ind_cor]
                         
-                        # Estimar y eliminar coordenadas del objeto
-                        objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor)
+                        # Eliminar vértices  del objeto si aplica
+                        objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor, intolerancia_x, intolerancia_y)
                     
                     # Retornar espacios eliminados a cero
                     ind_cor = 0
@@ -260,14 +261,14 @@ for archivo in os.listdir():
                             iter_linea[2] = objeto_iter[iter + 2 - ind_cor]
                             
                             # Estimar y eliminar coordenadas del objeto
-                            objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor)
+                            objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor, 0, 0)
                         else:
                             iter_linea[0] = objeto_iter[(len(objeto_iter) - 1) - (iter - pm_val) - 2 - ind_cor]
                             iter_linea[1] = objeto_iter[(len(objeto_iter) - 1) - (iter - pm_val) - 1 - ind_cor]
                             iter_linea[2] = objeto_iter[(len(objeto_iter) - 1) - (iter - pm_val) - ind_cor]
                             
                             # Estimar y eliminar coordenadas del objeto
-                            objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor)
+                            objeto_iter, ind_cor = funcion_estimar_eliminar(objeto_iter, ind_cor, 0, 0)
 
             # Procesamiento de archivo OBJ
             # Contadores para vértices (distinguen el inicio y final de vértices para cada objeto)
