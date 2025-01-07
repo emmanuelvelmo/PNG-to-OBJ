@@ -2,7 +2,7 @@ from PIL import Image
 import numpy
 
 # Ruta de la imagen
-ruta_imagen = r'C:\Users\-\Desktop\MP\UI\Combat Visor (5 #2).png'
+ruta_imagen = r'C:\Users\-\Desktop\MP\UI\Aim.png'
 
 # Cargar la imagen
 imagen_val = Image.open(ruta_imagen)
@@ -191,28 +191,28 @@ for coord_y in range(alto_imagen):
 iter_linea = [0.0] * 3
 
 # Número de vértices de longuitud del iterador de líneas (número impar)
-vertices_iterador = 7
+vertices_iterador = 9
 
 # Longuitud en píxeles del cuadrado de margen de tolerancia
-cuadrado_tolerancia = vertices_iterador - 2
+long_cuad_tolerancia = vertices_iterador - 2
 
 # Número de píxeles de margen de tolerancia
-tolerancia_x = (cuadrado_tolerancia - 1) / 2
-tolerancia_y = (cuadrado_tolerancia - 1) / 2
+tolerancia_x = (long_cuad_tolerancia - 1) / 2
+tolerancia_y = (long_cuad_tolerancia - 1) / 2
 
 # Iterar sobre los objetos de la listas de coordenadas
 for objeto_iter in listas_coordenadas:
     # Verificar que hayan suficientes coordenadas en el objeto
     if len(objeto_iter) >= vertices_iterador:
-        # Iterar sobre las coordenadas del objeto en orden inverso
-        iter = 0
+        # Espacios eliminados (corrección de índice en objeto)
+        ind_cor = 0
         
         # Itera en grupos de longuitud definida por el iterador de líneas
-        while iter <= len(objeto_iter) - vertices_iterador:
+        for iter in range((vertices_iterador - 1) // 2, len(objeto_iter) - (vertices_iterador - 1)):
             # Asignar extremos y punto medio a la variable de iteración
-            iter_linea[0] = objeto_iter[iter]
-            iter_linea[1] = objeto_iter[iter + int((vertices_iterador - 1) / 2)]
-            iter_linea[2] = objeto_iter[iter + (vertices_iterador - 1)]
+            iter_linea[0] = objeto_iter[iter - ind_cor]
+            iter_linea[1] = objeto_iter[iter + ((vertices_iterador - 1) // 2) - ind_cor]
+            iter_linea[2] = objeto_iter[iter + (vertices_iterador - 1) - ind_cor]
             
             # Calcular coordenada estimada
             coordenada_estimada = (
@@ -223,11 +223,11 @@ for objeto_iter in listas_coordenadas:
             # Eliminar la coordenada si está dentro del margen de error (punto medio)
             if (abs(coordenada_estimada[0] - iter_linea[1][0]) <= tolerancia_x or
                 abs(coordenada_estimada[1] - iter_linea[1][1]) <= tolerancia_y):
-                # Eliminar el punto medio
-                objeto_iter.pop(iter + int((vertices_iterador - 1) / 2))
-            else:
-                # Incrementar el índice si no se eliminó un elemento
-                iter += 1
+                # Eliminar el vértice
+                objeto_iter.pop(iter + ((vertices_iterador - 1) // 2) - ind_cor)
+                
+                # Corregir índice
+                ind_cor += 1
 
 # Procesamiento de archivo OBJ
 # Contadores para vértices (distinguen el inicio y final de vértices para cada objeto)
