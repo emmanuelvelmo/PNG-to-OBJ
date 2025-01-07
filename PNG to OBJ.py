@@ -8,14 +8,14 @@ for archivo in os.listdir():
         # Obtener ruta del archivo PNG
         ruta_imagen = os.path.join(os.getcwd(), archivo)
 
-        # Indicar archivo cargado
-        print(f"{archivo} processing")
-
         # Cargar la imagen
         imagen_val = Image.open(ruta_imagen)
 
         # Verificar que el archivo PNG tenga 4 canales (RGBA)
         if imagen_val.mode == 'RGBA':
+            # Indicar archivo cargado
+            print(f"{archivo} processing")
+            
             # Convertir la imagen a un array de numpy (asumiendo que siempre es RGBA)
             matriz_inicio = numpy.array(imagen_val)
 
