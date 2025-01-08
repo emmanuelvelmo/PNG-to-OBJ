@@ -1,4 +1,4 @@
-# PNG to OBJ Script
+# PNG to OBJ
 
 <p style="text-align: justify;">
   <strong>Input PNG</strong>
