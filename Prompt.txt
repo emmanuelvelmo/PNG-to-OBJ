@@ -1,0 +1,109 @@
+El siguiente programa captura perfectamente mi estilo de programar. Observa el programa para identificar sus peculiaridades: el flujo del programa (secciones marcadas con comentarios en mayúsculas),  el programa comienza importando librerias con sus nombres completos sin alias o abreviaciones, sin el uso de métodos para recortar funciones posteriormente, después se nombran las variables a usar, posteriormente las funciones más simples (es decir las últimas en usarse) van al comienzo y al fondo las más complejas o que llaman a otras, es decir, concatenando desde lo último a ser llamado hasta el fondo las primeras funciones a ser llamadas desde el bucle principal del programa, dando una jerarquía a su complejidad, definido todo esto lo último es el bucle principal del programa donde se hace uso de estos recursos y se define la lógica y flujo del programa así como su interacción con el usuario; también observa la forma de nombrar variables (uso de minículas con palabras en español aveces abreviadas si son muy largas y unidas con guión bajo); la forma de comentar líneas; el espaciado entre los elementos como bloques de código, funciones, ciclos, palabras clave (como break), operadores (cómo "variable = variable"), además del uso de paréntesis o corchetes para envolver el código en un formato de función(parámetro,\nparámetro,\nparámetro...\n) o bien funcion(parámetro, parámetro)\n{\ncódigo\n}
+
+Podrás observar que este estilo busca ser muy explícito con sus comentarios, es muy conciso al pedir información al usuario, cuida la estética visual de los elementos mostrados en la terminal sin saturar con información o detalles sobre las operaciones realizadas. En general el estilo se centra fuertemente en organizar de forma jerárquica los elementos y el flujo del programa para hacerlo legible y fácil de guiarse en el flujo desde el fondo hacia el comienzo como ya comenté anteriormente, también el estilo busca ser muy conciso. Otro aspecto es que autilizar funciones de una librería se evita asignar para todo sus parámetros variables anticipadamente para luego incluirlas con el nombre de la variable, es decir, se asigna el valor directo como parámetro a menos que el valor sea dado por el usuario (por ejemplo, un directorio), de lo contrario se deduce que el valor es invariable y no tiene sentido asignar una variable cuando el valor puede asignarse directamente (hay excepciones como asignar una lista de valores o un diccionario para evitar tanta redundancia, desde la cual al modificarse afectaría a los ciclos o desde donde sea llamada). El programa debe terminar con una función que haga deterse al programa si éste no es un ciclo while, de manera que la terminal no se cierre de forma abrupta.
+
+No escribas código u hagas algo que no sea afirmar si has comprendido el estilo del programa, el programa en cuestión es:
+
+import pathlib # Manejo moderno de rutas de archivos y directorios
+import cv2 # OpenCV: lectura de imágenes
+
+# VARIABLES
+extensiones_lista = ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'webp', 'gif', 'heic'] # Lista de formatos de imagen soportados por OpenCV
+valor_usuario = 0
+directorio_entrada = ""
+
+# FUNCIONES
+def procesar_directorio_imagenes():
+    global extensiones_lista, valor_usuario, directorio_entrada, ancho_val, alto_val
+    
+    # Generar nombre para directorio de salida
+    carpeta_salida = pathlib.Path(directorio_entrada).parent / f"{pathlib.Path(directorio_entrada).name} (output)"
+
+    # Crear carpeta de destino si no existe
+    carpeta_salida.mkdir(parents = True, exist_ok = True)
+    
+    # Mostrar separador visual para inicio de resultados
+    print("-" * 36)
+
+    cont_archivos = 0 # Contador de archivos generados
+    
+    # Procesar recursivamente cada imagen en el directorio
+    for extension_val in extensiones_lista:
+        for archivo_dir in pathlib.Path(directorio_entrada).rglob(f'*.{extension_val}'):
+            if archivo_dir.is_file():
+                # Cargar imagen desde archivo usando OpenCV
+                imagen_val = cv2.imread(str(archivo_dir))
+                
+                # Capturar dimensiones de la imagen
+                alto_val, ancho_val = imagen_val.shape[:2]
+                
+                lado_minimo = 0
+                
+                # Determinar el lado menor
+                if ancho_val < alto_val:
+                    lado_minimo = ancho_val
+                else:
+                    lado_minimo = alto_val
+                
+                # Establecer nuevo ancho y alto para imagen de salida
+                ancho_val = round(ancho_val * (valor_usuario / lado_minimo))
+                alto_val = round(alto_val * (valor_usuario / lado_minimo))
+                
+                # Redimensionar imagen a nuevos valores de ancho y alto
+                imagen_val = cv2.resize(imagen_val, (ancho_val, alto_val))
+                
+                # Convertir imagen a JPG
+                ok_val, imagen_val = cv2.imencode(".jpg", imagen_val, [cv2.IMWRITE_JPEG_QUALITY, 100])
+                imagen_val = cv2.imdecode(imagen_val, cv2.IMREAD_UNCHANGED) # Decodificar el buffer de memoria para volver a obtener la imagen ya comprimida en formato OpenCV
+
+                # Ruta relativa
+                ruta_relativa = archivo_dir.parent.relative_to(directorio_entrada)
+
+                # Generar ruta completa de archivo de salida
+                directorio_salida = carpeta_salida / ruta_relativa
+                
+                # Crear directorio para guardar imagen
+                directorio_salida.mkdir(parents = True, exist_ok = True)
+                
+                # Guardar imágen en directorio de salida correspondiente
+                cv2.imwrite(str(directorio_salida / archivo_dir.with_suffix(".jpg").name), imagen_val)
+                
+                # Mostrar archivo procesado
+                print(str(archivo_dir))
+
+                cont_archivos += 1 # Aumentar el contador de archivos
+
+    # En caso de no procesar ninguna imagen
+    if cont_archivos == 0:
+        print("No images processed")
+    
+    # Mostrar separador final
+    print("-" * 36 + "\n")
+
+# PUNTO DE PARTIDA
+# Bucle principal del programa
+while True:
+    # Solicitar directorio de entrada
+    while True:
+        directorio_entrada = input("Enter directory: ").strip('"\'')
+        
+        # Verificar que el directorio exista
+        if not pathlib.Path(directorio_entrada).exists():
+            print("Wrong directory\n")
+        else:
+            break
+    
+    # Solicitar lado mínimo de imagen
+    while True:
+        valor_usuario = input("Enter minimum size for width or height: ")
+        
+        # Únicamente número
+        if valor_usuario.isdigit():
+            valor_usuario = int(valor_usuario)
+            
+            break
+        else:
+            print("Wrong format\n")
+    
+    # Procesar directorio de imágenes recursivamente
+    procesar_directorio_imagenes()
