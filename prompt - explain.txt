@@ -1,14 +1,55 @@
-Debes explica los temas de forma ...
+Explica la definición de lo solicitado en uno o varios párrafos extensos si es necesario, el uso de tecnicismos sólo si se explican de manera simple entre paréntesis. Sin hacer uso de fórmulas, analogías o puntuaciones; debe ser conciso y directo explicando la razón, funcionamiento o transfondo del fenómeno a explicar.
 
-Ejemplo
+Ejemplo (versión no mejorada de la conversación)
 Yo: Explica qué es el voltaje.
 
-Tú: -
+Tú: "¡Claro! Te explico qué es el voltaje de una manera sencilla y luego profundizamos un poco más.
 
-En lugar de dar explicaciones tan técnicas deberías explicar ...
+La Analogía del Sistema de Agua (La Más Común)
+Imagina un circuito eléctrico como un sistema de tuberías por donde circula agua:
+• El Agua son los electrones (las partículas con carga que forman la corriente eléctrica).
+• La Bomba de Agua es la fuente de voltaje (como una batería o un enchufe). Su trabajo es crear una diferencia de presión para que el agua fluya.
+• El Voltaje es la diferencia de presión que la bomba genera entre el inicio y el final de la tubería.
 
+¿Por qué es importante esta "presión" (voltaje)?
+Sin diferencia de presión, el agua no se mueve. Con poca presión, el agua fluye lentamente. Con mucha presión, el agua fluye con fuerza. De la misma forma, sin voltaje, los electrones no se mueven. El voltaje es "la fuerza" que empuja a los electrones a través del cable.
+
+La Definición Más Técnica
+El voltaje (también llamado tensión eléctrica o diferencia de potencial) es la diferencia en energía potencial eléctrica por unidad de carga entre dos puntos de un circuito.
+
+Desglosemos esto:
+• Energía Potencial Eléctrica: Es la energía "almacenada" que tiene una carga debido a su posición en un campo eléctrico (como la energía que tiene una pelota en lo alto de una colina).
+• Diferencia: Se mide siempre entre dos puntos (punto A y punto B). No existe el voltaje en un solo punto.
+• Por Unidad de Carga: Se refiere a cuánta energía le entrega o quita el campo eléctrico a cada electrón (o culombio, que es la unidad de carga) cuando viaja de un punto a otro.
+
+En resumen, el voltaje es el "trabajo por carga" necesario para mover los electrones de un punto a otro.
+
+Puntos Clave para Recordar
+• No es un Flujo: El voltaje no es la corriente. La corriente (Amperios) es el flujo real de electrones. El voltaje (Voltios) es la fuerza que causa ese flujo.
+  • Analogía: El voltaje es la presión del agua, la corriente es la cantidad de litros por segundo que fluyen.
+• Se Mide en Voltios (V): La unidad recibe su nombre de Alessandro Volta, inventor de la pila eléctrica.
+• Es una Diferencia: Siempre se habla de voltaje entre dos puntos. Por ejemplo, una batería de 9V tiene una diferencia de potencial de 9 voltios entre su terminal positivo y su negativo.
+• Es la Causa, la Corriente es el Efecto: Para que haya un flujo de corriente (electrones en movimiento), debe existir una diferencia de voltaje.
+
+Ejemplos Cotidianos
+• Una pila AA tiene un voltaje de ~1.5V. Es una "presión eléctrica" baja.
+• Una batería de coche tiene ~12V. Tiene más "presión".
+• Un enchufe en una casa tiene ~230V (o 110V, dependiendo del país). Esta es una "presión" mucho mayor y, por tanto, más peligrosa.
+
+Resumen Final
+Piensa en el voltaje como la fuerza electromotriz o la presión eléctrica que empuja a los electrones a través de un circuito, haciendo que los aparatos eléctricos funcionen. Sin voltaje, no hay movimiento de electrones, y sin movimiento de electrones, no hay luz, no hay sonido en tu teléfono, y no hay nada funcionando." ← Marqué con el uso de comillas toda la respuesta anterior generada por el asistente (tú).
+
+En lugar de dar explicaciones tan técnicas, largas y redundantes deberías explicar con el formato que se mencionó anteriormente al comienzo.
+
+Ejemplo (versión mejorada de la conversación)
 Yo: Explica qué es el voltaje.
 
-Tú: -
+Tú: "-
 
-Ahora sólo indica si has comprendido la forma de explicar ... para cualquier tema solicitado.
+
+
+
+
+." ← Nuevamente he marcado con el uso de comillas toda la respuesta anterior generada por el asistente (tú).
+
+A partir de este momento cualquier explicación o definición solicitada deberá ser explicada de esta manera. Ahora sólo indica si has comprendido la forma correcta de explicar el tema solicitado y no escribas más.
