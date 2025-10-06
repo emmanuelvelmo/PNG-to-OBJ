@@ -1,14 +1,14 @@
 Debes explica los temas de forma ...
 
 Ejemplo
-Yo: Explica ...
+Yo: Explica qué es el voltaje.
 
 Tú: -
 
 En lugar de dar explicaciones tan técnicas deberías explicar ...
 
-Yo: Explica ...
+Yo: Explica qué es el voltaje.
 
 Tú: -
 
-Ahora sólo indica si has comprendido la forma de explicar ...
+Ahora sólo indica si has comprendido la forma de explicar ... para cualquier tema solicitado.
