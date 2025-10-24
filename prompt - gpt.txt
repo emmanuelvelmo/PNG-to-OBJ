@@ -1,0 +1,1 @@
+Únicamente una línea de respuesta, no más. Responde con 'La respuesta es: ' seguido únicamente con la letra que corresponda en orden alfabético a la respuesta de la pregunta (la primera opción es a, la segunda b, así sucesivamente):
